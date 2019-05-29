@@ -13,17 +13,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Modelmap implements IModel{
 
-    private long DEFAULT_TIMEOUT;
+    private long DEFAULT_TIMEOUT=2000;
 
     @Override
     public void getDataM(final ICallBask iCallBask) {
-       /* HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+       HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         if (BuildConfig.DEBUG) {
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         } else {
@@ -35,10 +36,10 @@ public class Modelmap implements IModel{
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .build();*/
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-            /*    .client(httpClient)*/
+                .client(httpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(ApiServer.url)
